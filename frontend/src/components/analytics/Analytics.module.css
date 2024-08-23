@@ -1,0 +1,106 @@
+.quizTableContainer {
+    width: 100%;
+    min-height: 100%;
+    padding: 0rem 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: #EDEDED;
+}
+
+.quizTableContainer h1 {
+    padding-top: 5rem;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 52px;
+    color: #5076FF;
+}
+
+.quizTable {
+    margin: 1rem 0rem 2rem 0rem;
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Poppins';
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.quizTable th,
+.quizTable td {
+    padding: 12px;
+    text-align: center;
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+
+.quizTable thead th {
+    background-color: #5076FF;
+    color: white;
+    font-size: 20px;
+}
+
+.quizTable thead th:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.quizTable thead th:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.quizTable tbody tr {
+    font-size: 16px;
+}
+
+.quizTable tbody tr:nth-child(odd) {
+    background-color: #EDEDED;
+}
+
+.quizTable tbody tr:nth-child(even) {
+    background-color: #B3C4FF;
+}
+
+.quizTable tbody tr:nth-child(even) td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.quizTable tbody tr:nth-child(even) td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.editAction,
+.deleteAction,
+.shareAction {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.editAction {
+    color: rebeccapurple;
+}
+
+.deleteAction {
+    color: #E32636;
+}
+
+.shareAction {
+    color: #17B169;
+}
+
+.actions .analysisLink {
+    color: black;
+    padding-left: 2rem;
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -1,0 +1,77 @@
+.dashboardContainer {
+    width: 100%;
+    min-height: 100%;
+    background-color: #EDEDED;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    overflow: hidden; 
+}
+
+.dashboardDetails {
+    margin-top: 4rem;
+    padding-left: 6rem;
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.createChip {
+    width: 20rem;
+    height: 10rem;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0rem 3rem;
+    border-radius: 8px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: white;
+    line-height: 3rem;
+}
+
+.textColor1{
+    color: #FF5D01;
+}
+
+.textColor2{
+    color: #60B84B;
+}
+
+.textColor3{
+    color: #5076FF;
+}
+
+.createChip div {
+    font-family: 'Popppins';
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.createChip div span {
+    font-size: 52px;
+    padding-right: 0.5rem;
+}
+
+
+.trendingQuizs {
+    display: flex;
+    flex-direction: column;
+    margin-left: 6rem;
+}
+
+.trendingQuizs h1 {
+    font-family: 'Popppins';
+    font-weight: 600;
+    font-size: 36px;
+    color: #474444;
+}
+
+.trendingQuizChips {
+    width: 60rem;
+    height: fit-content;
+    padding: 1rem 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}

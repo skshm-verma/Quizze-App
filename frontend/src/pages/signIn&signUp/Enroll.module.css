@@ -1,0 +1,233 @@
+.enrollWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F2F2F2;
+    z-index: 999;
+}
+
+.enrollContainer {
+    background-color: white;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 1000;
+    width: 90%;
+    height: 90%;
+}
+
+.enrollHeading {
+    padding-top: 2rem;
+    font-weight: 400;
+    font-size: 72px;
+    letter-spacing: 0.3rem;
+    color: #474444;
+    font-family: "Jomhuria";
+}
+
+.enrollType {
+    padding-top: 1rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.enrollType button {
+    color: #474444;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0.5rem 4rem;
+    border-radius: 8px;
+    background-color: transparent;
+    outline: transparent;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.selectedType {
+    box-shadow: 0px 1px 60px rgba(0, 25, 255, 0.5);
+}
+
+.formContainer {
+    width: 40rem;
+    height: 20rem;
+    padding-top: 3rem;
+}
+
+.formContainer form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.formContainer form button {
+    border-radius: 8px;
+    background-color: #A9BCFF;
+    border: 1px solid #A9BCFF;
+    color: #474444;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 18px;
+    width: 18rem;
+    padding: 0.5rem 1rem;
+    margin: auto;
+    cursor: pointer;
+}
+
+.usernameContainer,
+.emailContainer,
+.passwordContainer,
+.confirmPasswordContainer {
+    display: flex;
+    justify-content: end;
+}
+
+.usernameContainer label {
+    color: #474444;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.usernameContainer input {
+    margin: 0rem 2rem;
+    width: 25rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px 12px 0px 0px;
+    border: 2px solid transparent;
+    outline: transparent;
+    background-color: #F4F4F4;
+    font-size: 14px;
+}
+
+.emailContainer label {
+    color: #474444;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.emailContainer input {
+    margin: 0rem 2rem;
+    width: 25rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px 12px 0px 0px;
+    border: 2px solid transparent;
+    outline: transparent;
+    background-color: #F4F4F4;
+    font-size: 14px;
+}
+
+
+.passwordContainer label {
+    color: #474444;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 18px;
+
+}
+
+.passwordContainer input {
+    margin: 0rem 2rem;
+    width: 25rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px 12px 0px 0px;
+    border: 2px solid transparent;
+    outline: transparent;
+    background-color: #F4F4F4;
+    font-size: 14px;
+}
+
+.confirmPasswordContainer label {
+    color: #474444;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 18px;
+
+}
+
+.confirmPasswordContainer input {
+    margin: 0rem 2rem;
+    width: 25rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px 12px 0px 0px;
+    border: 2px solid transparent;
+    outline: transparent;
+    background-color: #F4F4F4;
+    font-size: 14px;
+}
+
+.formContainer form .errorInput {
+    border-color: #D60000;
+}
+
+.errorInput::placeholder {
+    color: #D60000;
+    font-family: 'Poppins';
+    font-size: 14px;
+    font-weight: 600;
+}
+
+input::placeholder {
+    color: black;
+}
+
+
+@media screen and (max-width: 786px) {
+
+    .enrollWrapper {
+        min-height: fit-content;
+    }
+
+    .enrollHeading {
+        font-size: 48px;
+    }
+
+    .enrollType {
+        flex-direction: column;
+    }
+
+    .formContainer{
+        width: 100%;
+        min-height: fit-content;
+    }
+
+    .formContainer form button {
+        width: auto;
+        padding: 0.5rem 4rem;
+    }
+
+    .usernameContainer,
+    .emailContainer,
+    .passwordContainer,
+    .confirmPasswordContainer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .usernameContainer input {
+        width: 18rem;
+    }
+
+    .emailContainer input {
+        width: 18rem;
+    }
+
+    .passwordContainer input {
+        width: 18rem;
+    }
+
+    .confirmPasswordContainer input {
+        width: 18rem;
+    }
+}

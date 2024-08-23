@@ -8,15 +8,13 @@ const notFound = require('./src/middlewares/notFound');
 const errorHandler = require('./src/middlewares/errorHandler');
 const cors = require('cors');
 
-
-
 //middlewares
-app.use(cors({origin: "https://form-bot-mern.vercel.app", credentials: true}));
+app.use(cors());
 app.use(express.json());
 
 
 app.get("/", (req, res) => {
-    return res.send("<h1>Form-Bot Backend Working </h1>");
+    return res.send("<h1>Quizze App Backend Working </h1>");
 })
 
 app.use("/v1", mainRoute);

@@ -1,0 +1,112 @@
+.wrapperAnalysis {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #EDEDED;
+}
+
+.analysisHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 5rem;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 52px;
+    color: #5076FF;
+}
+
+.analysisHeading h1 {
+    padding: 0rem;
+}
+
+.quizImpressions {
+    display: flex;
+    flex-direction: column;
+}
+
+.analysisHeading .quizImpressions span {
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 16px;
+    color: #FF5D01;
+}
+
+.analysisChips {
+
+    padding: 1rem;
+    margin: 1rem 0rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.analysisChips h2 {
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 32px;
+    color: black;
+}
+
+
+.option {
+    display: flex;
+    margin: 1rem 0rem;
+}
+
+.optionAnalysis {
+    display: flex;
+    margin: 2rem 0rem 1rem 0rem;
+}
+
+.optionValue {
+    background-color: white;
+    margin-right: 1rem;
+    width: 28rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+
+.optionValuePoll {
+    background-color: white;
+    margin-right: 1rem;
+    width: 20rem;
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+}
+
+.optionValue,
+.optionValuePoll span {
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #474444;
+}
+
+.optionValue,
+.optionValuePoll .value {
+    font-size: 28px;
+}
+
+.optionValue .message {
+    font-size: 16px;
+}
+
+.optionValuePoll .message {
+    font-size: 18px;
+}
+
+.analysisChips hr {
+    display: none;
+}
+
+.analysisChips:not(:last-of-type) hr {
+    display: block;
+    border: 1px solid #D7D7D7;
+    margin-top: 2.5rem;
+}

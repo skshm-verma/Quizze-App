@@ -1,0 +1,53 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #474444;
+    font-size: 24px;
+}
+
+.modalContent {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    width: 45rem;
+    text-align: center;
+}
+
+.modalActions {
+    margin-top: 1rem;
+}
+
+.cancelButton, .confirmButton {
+    padding: 0.5rem 1rem;
+    width: 14rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 1rem 0.5rem;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.cancelButton {
+    background: white;
+    color: #474444;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-left: 1rem;
+}
+
+.confirmButton {
+    background: #FF4B4B;
+    color: white;
+    margin-right: 1rem;
+}

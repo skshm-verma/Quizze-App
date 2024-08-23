@@ -1,0 +1,49 @@
+.quizChipContainer{
+    width: 11rem;
+    height: 4.5rem;
+    border-radius: 8px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.aboutChip{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3rem 0.5rem;
+}
+
+.aboutChip span {
+   font-family: 'Popppins';
+   font-weight: 600;
+   font-size: 28px;
+   color: #474444;
+}
+
+.impressions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.impressions span {
+    font-size: 18px;
+    color: #FF5D01;
+}
+
+.impressions img {
+    width: 16px;
+    height: 16px;
+}
+
+h3 {
+    font-family: 'Popppins';
+    font-size: 14px;
+    font-weight: 600;
+    color: #60B84B;
+    padding: 0.5rem 0.6rem;
+}
