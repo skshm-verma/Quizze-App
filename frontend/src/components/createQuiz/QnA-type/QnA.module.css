@@ -1,0 +1,268 @@
+.qnaContainer {
+    width: 70%;
+    margin: 0 auto;
+    padding: 1rem 5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.questionNumberContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.questionNumber {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0rem 2rem;
+}
+
+.questionNumber span {
+    width: 4rem;
+    height: 4rem;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-family: 'Poppins';
+    color: #9F9F9F;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.qnaContainer .questionNumber button {
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    border-radius: 50%;
+    border: none;
+    font-family: 'Poppins';
+    font-size: 48px;
+    color: #9F9F9F;
+    font-weight: 400;
+    margin-left: 0.5rem;
+}
+
+.qnaContainer .questionNumberContainer .maxQuestions {
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 500;
+    color: #9F9F9F;
+    background-color: transparent;
+    border-radius: none;
+    margin: 0;
+    background-color: transparent;
+    cursor: auto;
+    width: fit-content;
+    height: fit-content;
+    box-shadow: none;
+    margin: 1rem 0rem 2rem 0rem;
+}
+
+.selectedQuestion {
+    border: 2px solid #60B84B;
+}
+
+.questionWrapper {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.questionContainer {
+    margin-bottom: 2rem;
+}
+
+.questionContainer input::placeholder {
+    color: #9F9F9F;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.questionContainer input {
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: white;
+    color: black;
+    border-radius: 8px;
+    margin-right: 4rem;
+    outline: transparent;
+    border: 1px solid transparent;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    font-size: 20px;
+    font-family: 'Poppins';
+    font-weight: 500;
+}
+
+.optionType {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.optionType span {
+    margin: 0rem 2rem 0rem 1rem;
+    font-weight: 500;
+    font-family: 'Poppins';
+    font-size: 20px;
+    color: #9F9F9F;
+}
+
+.optionType label {
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 500;
+    color: #9F9F9F;
+}
+
+.optionType label input[type="radio"] {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    margin-right: 10px;
+    appearance: inherit;
+    border: 2px solid #9F9F9F;
+    border-radius: 50%;
+    background-color: transparent;
+
+}
+
+.optionType label input[type="radio"]:checked {
+    background-color: black;
+    offset: 2px;
+}
+
+.optionType input {
+    margin-right: 0.5rem;
+}
+
+.optionsContainer {
+    margin-bottom: 1rem;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.option .radio {
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 2px solid #9F9F9F;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.option .radio .selectedRadio {
+    width: 10px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #60B84B;
+}
+
+.option input {
+    width: 12rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    outline: transparent;
+    border-radius: 8px;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 18px;
+    margin-right: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.option input::placeholder {
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 18px;
+    color: #9F9F9F;
+}
+
+.option .selectedInput {
+    background-color: #60B84B;
+    color: white;
+}
+
+.option .selectedInput::placeholder{
+    color: white;
+}
+
+.deleteButton {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.addOptionButton {
+    width: 18rem;
+    padding: 0.5rem 1rem;
+    margin-left: 2rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: white;
+    color: #474444;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+}
+
+.cancelButton,
+.createButton {
+    width: 18rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #474444;
+    font-family: 'Poppins';
+    font-weight: 600;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.createButton {
+    background-color: #60B84B;
+    color: white;
+}
+
+
+
+.deleteAction {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    color: #E32636;
+}
