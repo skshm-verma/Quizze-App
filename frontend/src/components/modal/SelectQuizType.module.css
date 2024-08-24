@@ -1,0 +1,105 @@
+.modalContent {
+    width: 45rem;
+    background-color: white;
+    border-radius: 8px;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.quizName,
+.quizType,
+.modalAction {
+    width: 80%;
+}
+
+.quizName input {
+    padding: 1rem 1.5rem ;
+    width: 100%;
+    outline: transparent;
+    border: 1px solid transparent;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 24px;
+    font-family: 'Poppins';
+
+}
+
+.quizName input::placeholder {
+    font-family: 'Poppins';
+    color: #9F9F9F;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.quizType {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quizType span {
+    font-family: 'Poppins';
+    color: #9F9F9F;
+    font-weight: 500;
+    font-size: 24px;
+    padding-left: 0.5rem;
+}
+
+.quizType button {
+    cursor: pointer;
+    margin-right: 0.5rem;
+    outline: transparent;
+    border: 1px solid transparent;
+    background-color: white;
+    font-family: 'Poppins';
+    color: #9F9F9F;
+    font-weight: 500;
+    font-size: 18px;
+    padding: 0.2rem 1rem;
+    width: 9rem;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.quizType .active {
+    background-color: #60B84B;
+    color: white;
+}
+
+.modalAction {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modalAction button {
+    cursor: pointer;
+    outline: transparent;
+    border: 1px solid transparent;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 20px;
+    padding: 0.2rem 1rem;
+    width: 14rem;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.cancelButton {
+  color: #474444;
+  background-color: white;
+  margin-left: 0.5rem;
+}
+
+.confirmButton{
+  color: white;
+  background-color: #60B84B;
+  margin-right: 0.5rem;
+}

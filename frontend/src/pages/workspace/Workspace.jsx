@@ -6,7 +6,8 @@ import styles from './Workspace.module.css';
 
 const Workspace = () => {
   const [activeComponent, setActiveComponent] = useState('Dashboard');
-  const [analyticsKey, setAnalyticsKey] = useState(Date.now()); // forcing a re-render
+  const [lastActiveComponent, setLastActiveComponent] = useState('');
+  const [analyticsKey, setAnalyticsKey] = useState(Date.now());
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -15,7 +16,7 @@ const Workspace = () => {
       case 'Analytics':
         return <Analytics key={analyticsKey} reset={null} />;
       case 'CreateQuiz':
-        return <CreateQuiz />;
+        return <CreateQuiz setActiveComponent={setActiveComponent} lastActiveComponent={lastActiveComponent} />;
       default:
         return <Dashboard />;
     }
@@ -23,7 +24,11 @@ const Workspace = () => {
 
   const handleNavClick = (component) => {
     if (component === 'Analytics') {
-      setAnalyticsKey(Date.now()); // Updating key to force re-render
+      setAnalyticsKey(Date.now());
+    }
+    if (component === 'CreateQuiz') {
+      setLastActiveComponent(activeComponent);
+      setActiveComponent(component);
     }
     setActiveComponent(component);
   };
@@ -36,19 +41,25 @@ const Workspace = () => {
           <div className={styles.buttonGroup}>
             <button
               onClick={() => handleNavClick('Dashboard')}
-              className={activeComponent === 'Dashboard' ? styles.activeButton : ''}
+              className={
+                activeComponent === 'Dashboard' ? styles.activeButton :
+                  activeComponent === 'CreateQuiz' ?
+                    lastActiveComponent === 'Dashboard' ?
+                      styles.activeButton : '' : ''}
             >
               Dashboard
             </button>
             <button
               onClick={() => handleNavClick('Analytics')}
-              className={activeComponent === 'Analytics' ? styles.activeButton : ''}
+              className={activeComponent === 'Analytics' ? styles.activeButton :
+                activeComponent === 'CreateQuiz' ?
+                  lastActiveComponent === 'Analytics' ?
+                    styles.activeButton : '' : ''}
             >
               Analytics
             </button>
             <button
               onClick={() => handleNavClick('CreateQuiz')}
-              className={activeComponent === 'CreateQuiz' ? styles.activeButton : ''}
             >
               Create Quiz
             </button>
