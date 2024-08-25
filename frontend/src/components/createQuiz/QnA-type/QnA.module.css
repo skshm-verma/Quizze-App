@@ -14,6 +14,7 @@
 }
 
 .questionNumber {
+    position: relative;
     display: flex;
     align-items: center;
     margin: 1rem 0rem 2rem;
@@ -33,6 +34,14 @@
     font-size: 20px;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.questionNumber span .deleteQuestion {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    transform: translate(22px, -25px);
+    color: black;
 }
 
 .qnaContainer .questionNumber button {
@@ -65,8 +74,8 @@
     margin: 1rem 0rem 2rem 0rem;
 }
 
-.selectedQuestion {
-    border: 2px solid #60B84B;
+.questionNumber .selectedQuestion {
+    box-shadow: rgba(126, 239, 74, 0.755) 0px 5px 15px 0px;
 }
 
 .questionWrapper {
@@ -148,7 +157,9 @@
 }
 
 .optionsContainer {
-    margin-bottom: 1rem;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
 }
 
 .option {
@@ -180,8 +191,12 @@
     background-color: #60B84B;
 }
 
-.option input {
+.option .input {
     width: 12rem;
+ }
+
+.option input {
+    width: 16rem;
     padding: 0.5rem 1rem;
     border: 1px solid transparent;
     outline: transparent;
@@ -205,7 +220,48 @@
     color: white;
 }
 
-.option .selectedInput::placeholder{
+.option .selectedInput::placeholder {
+    color: white;
+}
+
+
+.timerContainer {
+    margin-right: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    font-family: 'Poppins';
+    font-size: 20px;
+    color: #9F9F9F;
+}
+
+.timerContainer span {
+    width: 8rem;
+    padding: 0.3rem 1rem;
+    background-color: white;
+    border: 1px solid transparent;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.timerContainer div {
+    text-align: center;
+    padding: 0.2rem 0rem;
+    width: 6rem;
+    background-color: white;
+    border: 1px solid transparent;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.timerContainer .selectedTimer {
+    background-color: #D60000;
+    box-shadow: rgba(251, 57, 57, 0.271) 0px 5px 15px 0px;
     color: white;
 }
 
@@ -230,6 +286,7 @@
     font-weight: 600;
     font-size: 20px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    margin-bottom: 0.5rem;
 }
 
 .actionButtons {
