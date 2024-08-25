@@ -1,0 +1,142 @@
+.quizWrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: #041325;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quizContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 85%;
+    height: 85%;
+    padding: 2rem 4rem;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
+}
+
+.quizHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins';
+    font-size: 28px;
+    font-weight: 700;
+    padding: 0rem 2rem;
+}
+
+.questionNumber {
+    color: #474444;
+}
+
+.timer {
+    color: #D60000;
+    margin-right: 2rem;
+}
+
+.questionText {
+    width: 100%;
+    font-family: 'Poppins';
+    font-size: 28px;
+    font-weight: 700;
+    color: #474444;
+    text-align: start;
+    padding-left: 1rem;
+}
+
+.optionsContainer {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.option {
+    width: 35%;
+    margin: 0.5rem 1rem;
+    text-align: center;
+    background-color: #F0F0F0;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border 0.3s;
+}
+
+.option .optionBoth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.option .optionBoth div {
+    width: 50%;
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option .optionBoth span {
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.option .optionBoth img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    margin: 0rem 1rem;
+}
+
+.optionImage {
+    width: 100%;
+    height: 6rem;
+    object-fit: fill;
+    border-radius: 5px;
+}
+
+.option .optionText {
+    width: 100%;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.option span {
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.selected {
+    border: 3px solid #5076FF;
+}
+
+
+.quizContainer button {
+    width: 25%;
+    padding: 0.6rem 1rem;
+    background-color: #60B84B;
+    color: white;
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
