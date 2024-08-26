@@ -9,7 +9,7 @@ const errorHandler = require('./src/middlewares/errorHandler');
 const cors = require('cors');
 
 //middlewares
-app.use(cors());
+app.use(cors({origin: "https://form-bot-mern.vercel.app", credentials: true}));
 app.use(express.json());
 
 
