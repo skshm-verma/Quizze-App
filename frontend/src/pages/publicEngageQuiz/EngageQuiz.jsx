@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import CupImage from '../../assets/cupImage.png'
 import styles from './EngageQuiz.module.css';
 
 const EngageQuiz = () => {
+    const [toggleSubmit, setToggleSubmit] = useState(false);
+    const [quizType, setQuizType] = useState('')
     const data = [
         {
             quizType: 'QnA',
             questions: [
                 {
                     correctAnswerIndex: 2,
-                    optionType: 'Text & Image URL',
+                    optionType: 'Image URL',
                     question: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt cupiditate quae sunt harum ea minima illo. Aliquid, quo commodi. Quod.Incidunt cupiditate quae sunt harum ea minima illo. Aliquid, quo commodi. Quod.',
                     options: [
                         { text: 'option 1 option 1', imageUrl: 'https://fastly.picsum.photos/id/254/536/354.jpg?hmac=HI8J-HWbYztb20pxIW36rKEkg4wqIbYPmayDvAk3ehA' },
@@ -86,14 +89,18 @@ const EngageQuiz = () => {
     const handleNextClick = () => {
         if (currentQuestionIndex < data[0].questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
-            setSelectedOption(null); // Reset selected option
+            setSelectedOption(null);
             const nextTimerValue = parseTimer(data[0].questions[currentQuestionIndex + 1].timer);
             setTimer(nextTimerValue);
         } else {
-            // If it's the last question, you can handle quiz completion here
             console.log('Quiz completed!');
         }
     };
+
+    const handleSubmitClick = () => {
+        setToggleSubmit(true);
+        setQuizType('QnA');
+    }
 
     // Effect to handle the timer logic
     useEffect(() => {
@@ -107,7 +114,6 @@ const EngageQuiz = () => {
                 });
             }, 1000);
 
-            // Cleanup the interval on component unmount or when timer changes
             return () => clearInterval(timerId);
         }
     }, [timer]);
@@ -116,40 +122,56 @@ const EngageQuiz = () => {
 
     return (
         <div className={styles.quizWrapper}>
-            <div className={styles.quizContainer}>
-                <div className={styles.quizHeader}>
-                    <div className={styles.questionNumber}>
-                        {`0${currentQuestionIndex + 1}/0${data[0].questions.length}`}
-                    </div>
-                    <div className={styles.timer}>{timer > 0 ? formatTimer(timer) : ''}</div>
-                </div>
-                <div className={styles.questionText}>{currentQuestion.question}</div>
-                <div className={styles.optionsContainer}>
-                    {currentQuestion.options.map((option, index) => (
-                        <div
-                            key={index}
-                            className={`${styles.option} ${selectedOption === index ? styles.selected : ''}`}
-                            onClick={() => handleOptionClick(index)}
-                        >
-                            {currentQuestion.optionType === 'Text & Image URL' ? 
-                            <div className={styles.optionBoth}>
-                                <div><span>{option.text}</span></div>
-                                <div><img src={option.imageUrl} alt="Option" /> </div>
-                            </div>
-                             : currentQuestion.optionType === 'Image URL' ? (
-                                <img src={option.imageUrl} alt="Option" className={styles.optionImage} />
-                            ) : (
-                                <div className={styles.optionText}><span>{option.text}</span></div>
-                            )}
+            {toggleSubmit
+                ?
+                quizType === 'QnA' ?
+                    <div className={styles.congratsContainer}>
+                        <div>
+                            <h1>Congrats Quiz is completed</h1>
+                            <img src={CupImage} alt="cupImage" />
+                            <h2>Your Score is <span>{`03/04`}</span></h2>
                         </div>
-                    ))}
-                </div>
-                {isLastQuestion ? (
-                    <button className={styles.submitButton} onClick={handleNextClick}>Submit</button>
-                ) : (
-                    <button className={styles.nextButton} onClick={handleNextClick}>NEXT</button>
-                )}
-            </div>
+                    </div>
+                    :
+                    <div className={styles.congratsContainer}>
+                        <div>
+                            <p>Thank you<br/> for participating in<br/> the Poll</p>
+                        </div>
+                    </div>
+                : <div className={styles.quizContainer}>
+                    <div className={styles.quizHeader}>
+                        <div className={styles.questionNumber}>
+                            {`0${currentQuestionIndex + 1}/0${data[0].questions.length}`}
+                        </div>
+                        <div className={styles.timer}>{timer > 0 ? formatTimer(timer) : ''}</div>
+                    </div>
+                    <div className={styles.questionText}>{currentQuestion.question}</div>
+                    <div className={styles.optionsContainer}>
+                        {currentQuestion.options.map((option, index) => (
+                            <div
+                                key={index}
+                                className={`${styles.option} ${selectedOption === index ? styles.selected : ''}`}
+                                onClick={() => handleOptionClick(index)}
+                            >
+                                {currentQuestion.optionType === 'Text & Image URL' ?
+                                    <div className={styles.optionBoth}>
+                                        <div><span>{option.text}</span></div>
+                                        <div><img src={option.imageUrl} alt="Option" /> </div>
+                                    </div>
+                                    : currentQuestion.optionType === 'Image URL' ? (
+                                        <img src={option.imageUrl} alt="Option" className={styles.optionImage} />
+                                    ) : (
+                                        <div className={styles.optionText}><span>{option.text}</span></div>
+                                    )}
+                            </div>
+                        ))}
+                    </div>
+                    {isLastQuestion ? (
+                        <button className={styles.submitButton} onClick={handleSubmitClick}>Submit</button>
+                    ) : (
+                        <button className={styles.nextButton} onClick={handleNextClick}>NEXT</button>
+                    )}
+                </div>}
         </div>
     );
 };
