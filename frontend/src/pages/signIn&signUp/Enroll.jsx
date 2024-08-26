@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { signInUser } from '../../helpers/api-communicator';
 import styles from './Enroll.module.css';
 
 const Enroll = () => {
@@ -69,23 +70,18 @@ const Enroll = () => {
             if (toggle) {
                 // Handle Log In logic here
                 try {
-                    const response = await fetch('/api/login', { // Update with your API endpoint
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ email, password }),
-                    });
-
-                    if (response.ok) {
-                        toast.success('Logged in successfully');
-                        resetForm(); // Clear form after successful login
-                    } else if (response.status === 401) {
-                        setErrors({ password: 'Invalid password' });
-                        toast.error('Invalid password');
-                    } else {
-                        toast.error('Login failed');
-                    }
+                    console.log(email,password);
+                    const response = await signInUser(email, password);
+                    console.log(response);
+                    // if (response.ok) {
+                    //     toast.success('Logged in successfully');
+                    //     resetForm(); // Clear form after successful login
+                    // } else if (response.status === 401) {
+                    //     setErrors({ password: 'Invalid password' });
+                    //     toast.error('Invalid password');
+                    // } else {
+                    //     toast.error('Login failed');
+                    // }
                 } catch (error) {
                     toast.error('An error occurred');
                 }
