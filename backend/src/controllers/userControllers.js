@@ -23,6 +23,7 @@ const userSignUp = async (req, res) => {
 }
 
 const userSignIn = async (req, res) => {
+    console.log(req.body);
     const { email, password } = req.body;
 
     if (!email || !password) {
