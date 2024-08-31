@@ -1,0 +1,67 @@
+.shareQuizContainer {
+    width: 60rem;
+    height: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.shareQuizContainer span {
+    position: absolute;
+    top: 2rem;
+    left: 3rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 50%;
+    box-shadow: rgba(126, 239, 74, 0.755) 0px 5px 15px 0px;
+    cursor: pointer;
+}
+
+.shareQuizContainer span .homeImg {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    color: #474444;
+}
+
+.shareQuizContainer h1 {
+    width: 100%;
+    text-align: center;
+    color: #474444;
+    font-size: 48px;
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+
+.shareQuizContainer div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: #EDEDED;
+    border-radius: 10px;
+    color: #474444;
+    font-size: 24px;
+    font-family: 'Poppins';
+    font-weight: 600;
+    padding: 0.5rem 2rem;
+    margin: 3rem 0rem;
+}
+
+.shareQuizContainer button {
+    width: 50%;
+    color: white;
+    font-size: 20px;
+    font-family: 'Poppins';
+    font-weight: 600;
+    background-color: #60B84B;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    border: transparent;
+    outline: transparent;
+    cursor: pointer;
+}

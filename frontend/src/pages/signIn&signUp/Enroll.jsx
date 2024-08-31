@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { signInUser } from '../../helpers/api-communicator';
+import { signInUser, signUpUser } from '../../helpers/api-communicator';
+import { useNavigate } from 'react-router-dom';
 import styles from './Enroll.module.css';
 
 const Enroll = () => {
@@ -10,6 +11,7 @@ const Enroll = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
     const resetForm = () => {
         setUserName('');
@@ -22,7 +24,7 @@ const Enroll = () => {
     const validateForm = () => {
         let formErrors = {};
 
-        const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
         const validNameRegex = /^[A-Za-z\s]{3,}$/;
 
         if (!email.trim()) {
@@ -40,7 +42,7 @@ const Enroll = () => {
             setConfirmPassword('');
         } else if (!strongPasswordRegex.test(password)) {
             formErrors.password = 'Weak password';
-            toast.error('Password must be at least 8 characters, include an uppercase letter, a lowercase letter, a number, and a special character.');
+            toast.error('Password must be at least 6 characters, include an uppercase letter, a lowercase letter, a number, and a special character.');
             setPassword('');
         }
 
@@ -68,37 +70,34 @@ const Enroll = () => {
         e.preventDefault();
         if (validateForm()) {
             if (toggle) {
-                // Handle Log In logic here
                 try {
-                    console.log(email,password);
                     const response = await signInUser(email, password);
-                    console.log(response);
-                    // if (response.ok) {
-                    //     toast.success('Logged in successfully');
-                    //     resetForm(); // Clear form after successful login
-                    // } else if (response.status === 401) {
-                    //     setErrors({ password: 'Invalid password' });
-                    //     toast.error('Invalid password');
-                    // } else {
-                    //     toast.error('Login failed');
-                    // }
+                    if (response.status === 200) {
+                        toast.success('Logged in successfully');
+                        resetForm();
+                        localStorage.setItem('token', response.data.token)
+                        navigate('/workspace')
+                    } else if (response.msg === 'Invalid Email') {
+                        setErrors({ email: 'Invalid Email' });
+                        toast.error('Invalid Email');
+                    } else if (response.msg === 'Invalid Password') {
+                        setErrors({ email: 'Invalid Password' });
+                        toast.error('Invalid Password');
+                    } else {
+                        toast.error('Login failed');
+                    }
                 } catch (error) {
                     toast.error('An error occurred');
                 }
             } else {
-                // Handle Sign Up logic here
                 try {
-                    const response = await fetch('/api/signup', { // Update with your API endpoint
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ userName, email, password }),
-                    });
-
-                    if (response.ok) {
+                    const response = await signUpUser(userName, email, password);
+                    
+                    if (response.status === 201) {
                         toast.success('Signed up successfully');
-                        resetForm(); // Clear form after successful sign-up
+                        resetForm();
+                        localStorage.setItem('token', response.data.token)
+                        navigate('/workspace')
                     } else {
                         toast.error('Sign up failed');
                     }
@@ -111,7 +110,7 @@ const Enroll = () => {
 
     const handleToggle = (newToggle) => {
         setToggle(newToggle);
-        resetForm(); // Clear all fields when toggling
+        resetForm();
     };
 
     return (
@@ -122,10 +121,10 @@ const Enroll = () => {
                 </div>
                 <div className={styles.enrollType}>
                     <button
-                        className={toggle ? '': styles.selectedType}
+                        className={toggle ? '' : styles.selectedType}
                         onClick={() => handleToggle(false)}>Sign Up</button>
                     <button
-                        className={toggle ?  styles.selectedType : '' }
+                        className={toggle ? styles.selectedType : ''}
                         onClick={() => handleToggle(true)}
                     >Log In</button>
                 </div>

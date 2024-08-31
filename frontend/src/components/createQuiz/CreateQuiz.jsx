@@ -6,7 +6,7 @@ import Poll from './poll-type/Poll';
 import Analytics from '../analytics/Analytics';
 import Dashboard from '../dashboard/Dashboard';
 
-const CreateQuiz = ({ setActiveComponent, lastActiveComponent }) => {
+const CreateQuiz = ({ setActiveComponent, lastActiveComponent, userId }) => {
   const [quizType, setQuizType] = useState('');
   const [quizName, setQuizName] = useState('');
   const [toggleToType, setToggleToType] = useState(true);
@@ -27,9 +27,9 @@ const CreateQuiz = ({ setActiveComponent, lastActiveComponent }) => {
             showLastComponent={handleShowLastComponent}
           />
         ) : quizType === 'QnA' ? (
-          <QnA quizName={quizName} showLastComponent={handleShowLastComponent} />
+          <QnA userId={userId} quizName={quizName} showLastComponent={handleShowLastComponent} />
         ) : (
-          <Poll quizName={quizName} showLastComponent={handleShowLastComponent} />
+          <Poll userId={userId} quizName={quizName} showLastComponent={handleShowLastComponent} />
         )}
       </div>
       {backgroundComponent === 'Analytics' ? <Analytics /> : <Dashboard />}

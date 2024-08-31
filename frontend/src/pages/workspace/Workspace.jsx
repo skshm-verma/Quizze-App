@@ -1,22 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CreateQuiz from '../../components/createQuiz/CreateQuiz';
 import Dashboard from '../../components/dashboard/Dashboard';
 import Analytics from '../../components/analytics/Analytics';
+import { verifyUser } from '../../helpers/api-communicator';
 import styles from './Workspace.module.css';
 
 const Workspace = () => {
   const [activeComponent, setActiveComponent] = useState('Dashboard');
   const [lastActiveComponent, setLastActiveComponent] = useState('');
   const [analyticsKey, setAnalyticsKey] = useState(Date.now());
+  const [userId, setUserId] = useState('');
+  const navigate = useNavigate();
 
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Dashboard':
-        return <Dashboard />;
+        return userId ? <Dashboard userId={userId} /> : null;
       case 'Analytics':
-        return <Analytics key={analyticsKey} reset={null} />;
+        return userId ? <Analytics 
+        setActiveComponent={setActiveComponent}
+        key={analyticsKey} 
+        reset={null} userId={userId} 
+        /> : null;;
       case 'CreateQuiz':
-        return <CreateQuiz setActiveComponent={setActiveComponent} lastActiveComponent={lastActiveComponent} />;
+        return userId ? <CreateQuiz
+          setActiveComponent={setActiveComponent}
+          lastActiveComponent={lastActiveComponent}
+          userId={userId}
+        /> : null;
       default:
         return <Dashboard />;
     }
@@ -32,6 +44,18 @@ const Workspace = () => {
     }
     setActiveComponent(component);
   };
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const response = await verifyUser();
+      if (response.status === 401) {
+        navigate('/');
+      } else {
+        setUserId(response.userId);
+      }
+    };
+    checkLoginStatus();
+  }, [])
 
   return (
     <div className={styles.workspaceContainer}>

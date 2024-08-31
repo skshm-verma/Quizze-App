@@ -1,63 +1,71 @@
-import React from 'react'
-import styles from './Dashboard.module.css'
-import TrendingQuizsChips from './dashboardChips/TrendingQuizsChips'
+import React, { useEffect, useState } from 'react';
+import { dashboardDetails } from '../../helpers/api-communicator';
+import styles from './Dashboard.module.css';
+import TrendingQuizsChips from './dashboardChips/TrendingQuizsChips';
 
-const userData = {
-  data: ["quizId1", "quizId2", "quizId3", "quizId4"]
-}
+const Dashboard = ({ userId }) => {
+  const [quizCount, setQuizCount] = useState(0);
+  const [questionCount, setQuestionCount] = useState(0);
+  const [totalImpressions, setTotalImpressions] = useState(0);
+  const [trendingQuizzes, setTrendingQuizzes] = useState([]);
 
-const quizData = {
-  data: [
-    { views: 100, createAt: "04 Sep, 2023" },
-    { views: 400, createAt: "05 Sep, 2023" },
-    { views: 300, createAt: "06 Sep, 2023" },
-    { views: 800, createAt: "07 Sep, 2023" }
-  ]
-}
+  useEffect(() => {
+    const fetchDashboardDetails = async () => {
+      if (!userId) return;
+      const data = await dashboardDetails(userId);
+      if (data) {
+        setQuizCount(data.numberOfQuizzes || 0);
+        setQuestionCount(data.numberOfQuestions || 0);
+        setTotalImpressions(data.totalImpressions || 0);
+        setTrendingQuizzes(data.quizzesWithImpressionsGreaterThan10 || []);
+      }
+    };
 
-const Dashboard = () => {
+    fetchDashboardDetails();
+  }, [userId]);
+
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.dashboardDetails}>
         <div className={`${styles.createChip} ${styles.textColor1}`}>
-          <div> <span>{"40"}</span> {"Quiz Created"}</div>
+          <div>
+            <span>{quizCount}</span> Quiz Created
+          </div>
         </div>
         <div className={`${styles.createChip} ${styles.textColor2}`}>
-          <div> <span>{"110"}</span> {"questions Created"}</div>
+          <div>
+            <span>{questionCount}</span> Questions Created
+          </div>
         </div>
         <div className={`${styles.createChip} ${styles.textColor3}`}>
-          <div> <span>{"1.4K"}</span> {"Total Impressions"}</div>
+          <div>
+            <span>{totalImpressions.toLocaleString()}</span> Total Impressions
+          </div>
         </div>
       </div>
       <div className={styles.trendingQuizs}>
-        <h1>Trending Quizs</h1>
+        <h1>Trending Quizzes</h1>
         <div className={styles.trendingQuizChips}>
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
-          <TrendingQuizsChips quizName={"Quiz 1"} impressions={660} createdAt={"07 Sep, 2023"} />
+          {trendingQuizzes.length > 0 ? (
+            trendingQuizzes.map((quiz, index) => (
+              <TrendingQuizsChips
+                key={index}
+                quizName={quiz.name}
+                impressions={quiz.impressions}
+                createdAt={new Date(quiz.createdAt).toLocaleDateString('en-GB', {
+                  day: '2-digit',
+                  month: 'short',
+                  year: 'numeric'
+                })} // Format date as "07 Sep, 2023"
+              />
+            ))
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

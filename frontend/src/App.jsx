@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Enroll />} />
         <Route path="/workspace" element={<Workspace/>} />
-        <Route path="/quizName/:id" element={<EngageQuiz/>} />
+        <Route path="/quiz/:id" element={<EngageQuiz/>} />
       </Routes>
     </>
   )

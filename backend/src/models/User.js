@@ -18,14 +18,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide password'],
     },
-    forms: [{
+    quizzes: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Form'
-    }],
-    folders: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Folder'
+        ref: 'Quiz'
     }]
-})
+});
 
 module.exports = mongoose.model("User", userSchema);

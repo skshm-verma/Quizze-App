@@ -23,7 +23,6 @@ const userSignUp = async (req, res) => {
 }
 
 const userSignIn = async (req, res) => {
-    console.log(req.body);
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -60,37 +59,4 @@ const verifyUser = async (req, res) => {
     res.status(statusCodes.OK).json({ userName, userId });
 }
 
-const updateUser = async (req, res) => {
-    const { userId, userName, email, oldPassword, newPassword } = req.body;
-
-    if (!userId || !userName || !email || !oldPassword || !newPassword) {
-        throw new BadRequestError('Required fields are missing');
-    }
-
-    const user = await User.findById(userId);
-    if (!user) {
-        throw new NotFoundError('User not found')
-    }
-
-    const oldEmail = await User.findOne({ email })
-    if(oldEmail){
-        throw new BadRequestError('Email already registered');
-    }
-
-    // Verify the old password
-    const isMatch = await bcrypt.compare(oldPassword, user.password);
-    if (!isMatch) {
-        throw new BadRequestError('Old password is incorrect');
-    }
-
-    // Update the fields
-    user.name = userName;
-    user.email = email;
-    user.password = await bcrypt.hash(newPassword, 10);
-
-    await user.save();
-    const token = generateToken(user._id.toString(), user.name);
-    res.status(statusCodes.OK).json({ msg: 'User updated successfully', token });
-}
-
-module.exports = { userSignUp, userSignIn, verifyUser, updateUser }
+module.exports = { userSignUp, userSignIn, verifyUser }

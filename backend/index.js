@@ -10,6 +10,7 @@ const cors = require('cors');
 
 //middlewares
 app.use(cors({origin: "https://quizze-the-create-quiz-app.vercel.app", credentials: true}));
+// app.use(cors());
 app.use(express.json());
 
 
