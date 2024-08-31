@@ -122,21 +122,20 @@ const Poll = ({ userId, quizName, quizData, showLastComponent }) => {
 
   const handleCreateQuiz = async () => {
     if (!validateQuiz()) return;
+
+    const loadingToast = toast.loading('Creating quiz...');
+
     try {
-      const response = await createNewQuiz(userId, quizName, 'QnA', questions);
+      const response = await createNewQuiz(userId, quizName, 'Poll', questions);
       if (response.status === 201) {
         setQuizId(response.data._id);
         setToggleShareQuiz(true);
+        toast.success('Quiz created successfully', { id: loadingToast });
       }
     } catch (error) {
       console.log(error);
+      toast.error('Failed to create quiz', { id: loadingToast });
     }
-  };
-
-  const handleTimerChange = (qIndex, timerValue) => {
-    const newQuestions = [...questions];
-    newQuestions[qIndex].timer = timerValue;
-    setQuestions(newQuestions);
   };
 
   const handleDeleteQuestion = (index) => {
@@ -155,20 +154,22 @@ const Poll = ({ userId, quizName, quizData, showLastComponent }) => {
     }
   };
 
-  const handleSaveQuiz = async () => {
+ const handleSaveQuiz = async () => {
     if (quizData) {
       if (!validateQuiz()) return;
+
+      const loadingToast = toast.loading('Saving quiz...');
+
       try {
         const response = await updateQuiz(quizId, questions);
         if (response.status === 200) {
-          toast.success('Quiz updated successfully');
+          toast.success('Quiz updated successfully', { id: loadingToast });
           showLastComponent();
         }
       } catch (error) {
-        toast.error('Failed to update quiz');
+        toast.error('Failed to update quiz', { id: loadingToast });
       }
     } else {
-      // handle create new quiz logic
       handleCreateQuiz();
     }
   };

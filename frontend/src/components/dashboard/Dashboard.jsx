@@ -17,7 +17,11 @@ const Dashboard = ({ userId }) => {
         setQuizCount(data.numberOfQuizzes || 0);
         setQuestionCount(data.numberOfQuestions || 0);
         setTotalImpressions(data.totalImpressions || 0);
-        setTrendingQuizzes(data.quizzesWithImpressionsGreaterThan10 || []);
+        
+        // Sort quizzes based on impressions in descending order
+        const sortedQuizzes = (data.quizzesWithImpressionsGreaterThan10 || []).sort((a, b) => b.impressions - a.impressions);
+        
+        setTrendingQuizzes(sortedQuizzes);
       }
     };
 
@@ -60,7 +64,7 @@ const Dashboard = ({ userId }) => {
               />
             ))
           ) : (
-            <></>
+            <p>No trending quizzes available</p>
           )}
         </div>
       </div>

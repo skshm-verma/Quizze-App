@@ -33,6 +33,14 @@ const createQuiz = async (req, res) => {
 
 const getDashboardDetails = async (req, res) => {
     const { userId } = req.query;
+    const formatNumber = (num) => {
+        if (num >= 1000000) {
+            return `${Math.floor(num / 100000) / 10}M`;
+        } else if (num >= 1000) {
+            return `${Math.floor(num / 100) / 10}K`;
+        }
+        return num;
+    };
 
     // Find the user and populate the quizzes array
     const user = await User.findById(userId).populate('quizzes');
@@ -66,7 +74,7 @@ const getDashboardDetails = async (req, res) => {
     res.status(statusCodes.OK).json({
         numberOfQuizzes,
         numberOfQuestions,
-        totalImpressions,
+        totalImpressions: formatNumber(totalImpressions), 
         quizzesWithImpressionsGreaterThan10,
     });
 }
@@ -138,7 +146,9 @@ const getQuizAnalytics = async (req, res) => {
     res.status(statusCodes.OK).json({
         quizName: quiz.quizName,
         quizType: quiz.quizType,
-        analytics: result
+        analytics: result,
+        impressions: quiz.impressions,
+        createdAt: quiz.createdAt
     });
 };
 

@@ -2,28 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { quizAnalytics } from '../../../helpers/api-communicator';
 import styles from './QuestionAnalysis.module.css';
 
-const QuestionAnalysis = ({ quizId }) => { // Accept quizId as a prop
+// Utility function to capitalize the first letter of a string
+const capitalizeFirstLetter = (string) => {
+    if (!string) return '';
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+const QuestionAnalysis = ({ quizId }) => {
     const [data, setData] = useState([]);
     const [type, setType] = useState('');
     const [quizName, setQuizName] = useState('');
-
+    const [impressions, setImpressions] = useState('');
+    const [createdAt, setCreatedAt] = useState('');
 
     useEffect(() => {
         const fetchQuizzes = async () => {
             try {
                 const response = await quizAnalytics(quizId);
+                console.log(response);
                 setData(response.analytics);
                 setType(response.quizType);
-                setQuizName(response.quizName);
+                // Capitalize the first letter of quizName
+                setQuizName(capitalizeFirstLetter(response.quizName));
+                setImpressions(response.impressions);
+                setCreatedAt(response.createdAt);
             } catch (error) {
                 console.error('Error fetching quizzes:', error);
             }
-        }
+        };
+
         if (quizId) {
             fetchQuizzes();
         }
-    }, []);
-
+    }, [quizId]);
 
     // Render for QnA type
     const renderQnA = (item, index) => (
@@ -63,8 +74,8 @@ const QuestionAnalysis = ({ quizId }) => { // Accept quizId as a prop
                 <div className={styles.analysisHeading}>
                     <h1>{quizName} Question Analysis</h1>
                     <div className={styles.quizImpressions}>
-                        <span>Created on: 04 Sep, 2023</span>
-                        <span>Impressions: 667</span>
+                        <span>Created on: {createdAt}</span>
+                        <span>Impressions: {impressions}</span>
                     </div>
                 </div>
                 {data.map((item, index) => (

@@ -69,41 +69,39 @@ const Enroll = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validateForm()) {
-            if (toggle) {
-                try {
+            let toastId;
+            try {
+                if (toggle) {
+                    toastId = toast.loading('Logging in...');
                     const response = await signInUser(email, password);
                     if (response.status === 200) {
-                        toast.success('Logged in successfully');
+                        toast.success('Logged in successfully', { id: toastId });
                         resetForm();
-                        localStorage.setItem('token', response.data.token)
-                        navigate('/workspace')
+                        localStorage.setItem('token', response.data.token);
+                        navigate('/workspace');
                     } else if (response.msg === 'Invalid Email') {
                         setErrors({ email: 'Invalid Email' });
-                        toast.error('Invalid Email');
+                        toast.error('Invalid Email', { id: toastId });
                     } else if (response.msg === 'Invalid Password') {
                         setErrors({ email: 'Invalid Password' });
-                        toast.error('Invalid Password');
+                        toast.error('Invalid Password', { id: toastId });
                     } else {
-                        toast.error('Login failed');
+                        toast.error('Login failed', { id: toastId });
                     }
-                } catch (error) {
-                    toast.error('An error occurred');
-                }
-            } else {
-                try {
+                } else {
+                    toastId = toast.loading('Signing up...');
                     const response = await signUpUser(userName, email, password);
-                    
                     if (response.status === 201) {
-                        toast.success('Signed up successfully');
+                        toast.success('Signed up successfully', { id: toastId });
                         resetForm();
-                        localStorage.setItem('token', response.data.token)
-                        navigate('/workspace')
+                        localStorage.setItem('token', response.data.token);
+                        navigate('/workspace');
                     } else {
-                        toast.error('Sign up failed');
+                        toast.error('Sign up failed', { id: toastId });
                     }
-                } catch (error) {
-                    toast.error('An error occurred');
                 }
+            } catch (error) {
+                toast.error('An error occurred', { id: toastId });
             }
         }
     };

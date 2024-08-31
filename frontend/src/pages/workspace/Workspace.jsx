@@ -4,6 +4,7 @@ import CreateQuiz from '../../components/createQuiz/CreateQuiz';
 import Dashboard from '../../components/dashboard/Dashboard';
 import Analytics from '../../components/analytics/Analytics';
 import { verifyUser } from '../../helpers/api-communicator';
+import { toast } from 'react-hot-toast';
 import styles from './Workspace.module.css';
 
 const Workspace = () => {
@@ -22,7 +23,7 @@ const Workspace = () => {
         setActiveComponent={setActiveComponent}
         key={analyticsKey} 
         reset={null} userId={userId} 
-        /> : null;;
+        /> : null;
       case 'CreateQuiz':
         return userId ? <CreateQuiz
           setActiveComponent={setActiveComponent}
@@ -45,6 +46,12 @@ const Workspace = () => {
     setActiveComponent(component);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token'); 
+    toast.success('Logged out successfully!');
+    navigate('/');
+  };
+
   useEffect(() => {
     const checkLoginStatus = async () => {
       const response = await verifyUser();
@@ -55,7 +62,7 @@ const Workspace = () => {
       }
     };
     checkLoginStatus();
-  }, [])
+  }, [navigate]);
 
   return (
     <div className={styles.workspaceContainer}>
@@ -90,7 +97,7 @@ const Workspace = () => {
           </div>
           <div className={styles.logoutContainer}>
             <hr />
-            <button className={styles.logoutButton}>LOGOUT</button>
+            <button className={styles.logoutButton} onClick={handleLogout}>LOGOUT</button>
           </div>
         </div>
       </nav>

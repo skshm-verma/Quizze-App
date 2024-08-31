@@ -103,7 +103,7 @@
 
 .optionImage {
     width: 100%;
-    height: 6rem;
+    height: 7rem;
     object-fit: fill;
     border-radius: 5px;
 }
@@ -126,7 +126,6 @@
     border: 3px solid #5076FF;
 }
 
-
 .quizContainer button {
     width: 25%;
     padding: 0.6rem 1rem;
@@ -140,7 +139,6 @@
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
 
 .congratsContainer {
     background-color: white;
@@ -182,4 +180,73 @@
 .congratsContainer div p {
     font-size: 68px;
     text-align: center;
+}
+
+@media screen and (max-width: 786px)  {
+
+    .quizWrapper {
+        background-color: white;
+    }
+
+    .quizContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 100%;
+        padding: 0rem 0rem;
+        border-radius: 8px;
+        background-color: white;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
+    }
+
+    .questionText {
+        width: 100%;
+        font-family: 'Poppins';
+        font-size: 28px;
+        font-weight: 700;
+        color: #474444;
+        text-align: center;
+        padding-left: 1rem;
+    }
+
+    .optionsContainer {
+        width: 100%;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        padding-top: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+
+    .option {
+        width: 85%;
+        margin: 0.5rem 1rem;
+        padding: 0.3rem;
+        text-align: center;
+        background-color: #F0F0F0;
+        border: 3px solid transparent;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: border 0.3s;
+    }
+
+    .timer {
+        margin-right: 0rem;
+    }
+
+    .congratsContainer {
+        box-shadow: none;
+    }
+
+    .congratsContainer div h1,h2 {
+        text-align: center;
+    }
+
+    .congratsContainer div p {
+        font-size: 34px;
+    }
 }

@@ -23,7 +23,6 @@ const QnA = ({ userId, quizName, quizData, showLastComponent }) => {
 
   const handleQuestionChange = (index, field, value) => {
     if (quizData && field === 'optionType') {
-      // Prevent changing option type if editing an existing quiz
       toast.error('Cannot change option type');
       return;
     }
@@ -34,7 +33,6 @@ const QnA = ({ userId, quizName, quizData, showLastComponent }) => {
 
   const handleOptionChange = (qIndex, oIndex, field, value) => {
     const newQuestions = [...questions];
-    // Update the appropriate field based on optionType
     if (field === 'Text') {
       newQuestions[qIndex].options[oIndex].text = value;
     } else if (field === 'Image URL') {
@@ -43,11 +41,8 @@ const QnA = ({ userId, quizName, quizData, showLastComponent }) => {
     setQuestions(newQuestions);
   };
 
-
-
   const handleAddOption = (qIndex) => {
     if (quizData) {
-      // Prevent adding options if editing an existing quiz
       toast.error('Cannot add new options');
       return;
     }
@@ -60,7 +55,6 @@ const QnA = ({ userId, quizName, quizData, showLastComponent }) => {
 
   const handleDeleteOption = (qIndex, oIndex) => {
     if (quizData) {
-      // Prevent deleting questions if editing an existing quiz
       toast.error('Cannot delete options');
       return;
     }
@@ -71,65 +65,82 @@ const QnA = ({ userId, quizName, quizData, showLastComponent }) => {
 
   const handleAddQuestion = () => {
     if (quizData) {
-      // Prevent adding questions if editing an existing quiz
       toast.error('Cannot add new questions');
       return;
     }
     if (questions.length < 5) {
       setQuestions([...questions, { question: '', optionType: 'Text', options: [{ text: '', imageUrl: '' }, { text: '', imageUrl: '' }], correctAnswerIndex: null, timer: 'OFF' }]);
-      setSelectedQuestionIndex(questions.length); // Set to the newly added question
+      setSelectedQuestionIndex(questions.length);
     }
   };
 
   const handleCorrectAnswer = (qIndex, oIndex) => {
     if (quizData) {
-      // Prevent changing correct answer index if editing an existing quiz
       toast.error('Cannot change correct answer choice');
       return;
     }
     const newQuestions = [...questions];
-    newQuestions[qIndex].correctAnswerIndex = oIndex; // Set the selected option as correct
+    newQuestions[qIndex].correctAnswerIndex = oIndex;
     setQuestions(newQuestions);
   };
 
   const validateQuiz = () => {
-    // Iterate through each question
     for (const question of questions) {
       if (!question.question.trim()) {
         toast.error('All question fields must be filled out.');
-        return false; // Stop validation and return false if a question is empty
+        return false;
       }
   
       if (question.correctAnswerIndex === null) {
         toast.error('You must select a correct answer for each question.');
-        return false; // Stop validation and return false if no correct answer is selected
+        return false;
       }
   
-      // Iterate through each option for the current question
       for (const option of question.options) {
-        // Check if both text and imageUrl fields are empty
         if (!option.text.trim() && !option.imageUrl.trim()) {
           toast.error('All options field must be filled out.');
-          return false; // Stop validation and return false if an option is empty
+          return false;
         }
       }
     }
-  
-    // If all checks pass, return true
     return true;
-  }
-
+  };
 
   const handleCreateQuiz = async () => {
     if (!validateQuiz()) return;
+
+    const loadingToast = toast.loading('Creating quiz...');
+
     try {
       const response = await createNewQuiz(userId, quizName, 'QnA', questions);
       if (response.status === 201) {
         setQuizId(response.data._id);
         setToggleShareQuiz(true);
+        toast.success('Quiz created successfully', { id: loadingToast });
       }
     } catch (error) {
       console.log(error);
+      toast.error('Failed to create quiz', { id: loadingToast });
+    }
+  };
+
+  const handleSaveQuiz = async () => {
+    if (quizData) {
+      if (!validateQuiz()) return;
+
+      const loadingToast = toast.loading('Saving quiz...');
+
+      try {
+        const response = await updateQuiz(quizId, questions);
+        if (response.status === 200) {
+          toast.success('Quiz updated successfully', { id: loadingToast });
+          showLastComponent();
+        }
+      } catch (error) {
+        toast.error('Failed to update quiz', { id: loadingToast });
+      }
+    } else {
+      handleCreateQuiz();
     }
   };
 
@@ -147,31 +158,13 @@ const QnA = ({ userId, quizName, quizData, showLastComponent }) => {
     const newQuestions = questions.filter((_, qIndex) => qIndex !== index);
     setQuestions(newQuestions);
 
-    // Update the selected question index
     if (index === selectedQuestionIndex && newQuestions.length > 0) {
-      setSelectedQuestionIndex(0); // Select the first question if the current one is deleted
+      setSelectedQuestionIndex(0);
     } else if (index < selectedQuestionIndex) {
-      setSelectedQuestionIndex(selectedQuestionIndex - 1); // Shift index if earlier question is deleted
+      setSelectedQuestionIndex(selectedQuestionIndex - 1);
     }
   };
 
-  const handleSaveQuiz = async () => {
-    if (quizData) {
-      if (!validateQuiz()) return;
-      try {
-        const response = await updateQuiz(quizId, questions);
-        if (response.status === 200) {
-          toast.success('Quiz updated successfully');
-          showLastComponent();
-        }
-      } catch (error) {
-        toast.error('Failed to update quiz');
-      }
-    } else {
-      // handle create new quiz logic
-      handleCreateQuiz();
-    }
-  };
 
   return (
     <div className={toggleShareQuiz ? `${styles.qnaContainer2}` : `${styles.qnaContainer}`}>
