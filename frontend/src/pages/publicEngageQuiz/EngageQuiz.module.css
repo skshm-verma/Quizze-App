@@ -260,4 +260,8 @@
     .selected {
         border: 3px solid #5076FF;
     }
+
+    .quizContainer button{
+        width: 30%;
+    }
 }
