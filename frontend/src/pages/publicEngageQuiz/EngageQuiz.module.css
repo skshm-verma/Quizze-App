@@ -238,7 +238,15 @@
     }
 
     .optionImage {
-        height: 6rem;
+        height: 5.5rem;
+    }
+
+    .option .optionBoth div {
+        height: 5.5rem;
+    }
+
+    .option .optionText {
+        height: 5.5rem;
     }
 
     .timer {
