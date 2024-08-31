@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { fetchQuizDetails, questionUpdate, updateImpression } from '../../helpers/api-communicator';
 import CupImage from '../../assets/cupImage.png';
+import { toast } from 'react-hot-toast';
 import styles from './EngageQuiz.module.css';
 
 const EngageQuiz = () => {
@@ -65,57 +66,72 @@ const EngageQuiz = () => {
     const handleNextClick = async () => {
         if (!data || !currentQuestion || toggleSubmit || isNextClicked.current) return;
 
+        const loadingToast = toast.loading('Submitting Answer...');
         isNextClicked.current = true;
 
-        if (selectedOption !== null && !evaluatedAnswers.has(currentQuestion._id)) {
-            const questionId = currentQuestion._id;
-            const isCorrect = currentQuestion.correctAnswerIndex === selectedOption;
+        try {
+            if (selectedOption !== null && !evaluatedAnswers.has(currentQuestion._id)) {
+                const questionId = currentQuestion._id;
+                const isCorrect = currentQuestion.correctAnswerIndex === selectedOption;
 
-            const response = await questionUpdate(quizId, questionId, selectedOption, true);
-            console.log(response);
+                await questionUpdate(quizId, questionId, selectedOption, true);
 
-            if (isCorrect) {
-                setCorrectAnswers(prev => prev + 1);
+                if (isCorrect) {
+                    setCorrectAnswers(prev => prev + 1);
+                }
+
+                setEvaluatedAnswers(prev => new Set(prev).add(questionId));
             }
 
-            setEvaluatedAnswers(prev => new Set(prev).add(questionId));
-        }
+            if (currentQuestionIndex < data.questions.length - 1) {
+                setCurrentQuestionIndex(currentQuestionIndex + 1);
+                setSelectedOption(null);
+                const nextTimerValue = parseTimer(data.questions[currentQuestionIndex + 1].timer);
+                setTimer(nextTimerValue);
+            }
 
-        if (currentQuestionIndex < data.questions.length - 1) {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-            setSelectedOption(null);
-            const nextTimerValue = parseTimer(data.questions[currentQuestionIndex + 1].timer);
-            setTimer(nextTimerValue);
+        } catch (error) {
+            toast.error('An error occurred. Please try again.');
+        } finally {
+            toast.dismiss(loadingToast); // Dismiss the loading toast
+            isNextClicked.current = false;
         }
-
-        isNextClicked.current = false;
     };
+
 
     const handleSubmitClick = async () => {
         if (!data || isSubmitting.current || toggleSubmit) return;
 
+        const loadingToast = toast.loading('Submitting Answer...');
         isSubmitting.current = true;
 
-        for (const question of data.questions) {
-            const questionId = question._id;
-            if (!evaluatedAnswers.has(questionId)) {
-                const selected = selectedOption !== null ? selectedOption : null;
-                const isCorrect = selected !== null && question.correctAnswerIndex === selected;
+        try {
+            for (const question of data.questions) {
+                const questionId = question._id;
+                if (!evaluatedAnswers.has(questionId)) {
+                    const selected = selectedOption !== null ? selectedOption : null;
+                    const isCorrect = selected !== null && question.correctAnswerIndex === selected;
 
-                if (selected !== null) {
-                    const response = await questionUpdate(quizId, questionId, selected, true);
-                    console.log(response);
-                    if (isCorrect) {
-                        setCorrectAnswers(prev => prev + 1);
+                    if (selected !== null) {
+                        await questionUpdate(quizId, questionId, selected, true);
+                        if (isCorrect) {
+                            setCorrectAnswers(prev => prev + 1);
+                        }
                     }
                 }
             }
-        }
 
-        setToggleSubmit(true);
-        isSubmitting.current = false;
-        clearInterval(timerId.current);
+            setToggleSubmit(true);
+            clearInterval(timerId.current);
+
+        } catch (error) {
+            toast.error('An error occurred. Please try again.');
+        } finally {
+            toast.dismiss(loadingToast); // Dismiss the loading toast
+            isSubmitting.current = false;
+        }
     };
+
 
     useEffect(() => {
         if (timer > 0 && !toggleSubmit) {

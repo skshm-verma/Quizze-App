@@ -198,18 +198,21 @@
         padding: 0rem 0rem;
         border-radius: 8px;
         background-color: white;
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        box-shadow: none
         /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
+    }
+
+    .quizHeader {
+        width: 100%;
+        font-size: 24px;
+        padding: 0.5rem 2rem;
     }
 
     .questionText {
         width: 100%;
-        font-family: 'Poppins';
-        font-size: 28px;
-        font-weight: 700;
-        color: #474444;
+        font-size: 24px;
         text-align: center;
-        padding-left: 1rem;
+        padding: 0rem;
     }
 
     .optionsContainer {
@@ -234,6 +237,10 @@
         transition: border 0.3s;
     }
 
+    .optionImage {
+        height: 6rem;
+    }
+
     .timer {
         margin-right: 0rem;
     }
@@ -248,5 +255,9 @@
 
     .congratsContainer div p {
         font-size: 34px;
+    }
+
+    .selected {
+        border: 3px solid #5076FF;
     }
 }
