@@ -75,3 +75,10 @@
     flex-wrap: wrap;
     gap: 2rem;
 }
+
+.trendingQuizChips p {
+    font-family: 'Popppins';
+    font-weight: 600;
+    font-size: 16px;
+    color: #474444;
+}

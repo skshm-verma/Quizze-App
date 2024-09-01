@@ -42,8 +42,13 @@ const Enroll = () => {
             setConfirmPassword('');
         } else if (!strongPasswordRegex.test(password)) {
             formErrors.password = 'Weak password';
-            toast.error('Password must be at least 6 characters, include an uppercase letter, a lowercase letter, a number, and a special character.');
+            toast.error('Password must be at least 6 characters.');
+            toast.error('Include an uppercase letter.');
+            toast.error('Include a lowercase letter.');
+            toast.error('Include a number.');
+            toast.error('Include a special character.');
             setPassword('');
+            setConfirmPassword('');
         }
 
         if (!toggle) {
