@@ -78,17 +78,18 @@ const Analytics = ({ reset, userId, setActiveComponent}) => {
   };
 
   const confirmDelete = async (quizId) => {
+
+    const deletingToast = toast.loading('Deleting quiz...');
     try {
       const response = await quizDelete(quizId);
       if (response.status === 200) {
-        toast.success('Quiz deleted successfully');
+        toast.success('Quiz deleted successfully', { id: deletingToast });
         setQuizzes(quizzes.filter((quiz) => quiz.id !== quizId));
       } else {
-        toast.error('Failed to delete quiz');
+        toast.error('Failed to delete quiz', { id: deletingToast });
       }
     } catch (error) {
-      console.error('Error deleting quiz:', error);
-      toast.error('An error occurred while deleting the quiz');
+      toast.error('An error occurred while deleting the quiz', { id: deletingToast });
     }
     setIsModalOpen(false);
     setQuizToDelete(null);

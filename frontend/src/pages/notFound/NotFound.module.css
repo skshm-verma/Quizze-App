@@ -1,0 +1,58 @@
+/* Container for the Not Found page */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to left top, #4B83FF, #B794F4);
+    color: white;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Inner content styling */
+.content {
+    max-width: 600px;
+    padding: 30px 50px;
+    background: rgba(0, 0, 0, 0.5); /* Darker background for better contrast */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
+    color: #ffffff; /* Ensuring text is white for contrast */
+}
+
+/* Styling for the error code */
+.errorCode {
+    font-size: 8rem;
+    margin: 0;
+    font-weight: bold;
+    color: #ffffff; /* White color for readability */
+}
+
+/* Styling for the message */
+.message {
+    font-size: 1.8rem;
+    margin: 20px 0;
+    color: #ffffff; /* White color for readability */
+}
+
+/* Styling for the home link */
+.homeLink {
+    display: inline-block;
+    padding: 12px 24px;
+    margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Slightly thicker border for visibility */
+    color: white;
+    background: rgba(255, 255, 255, 0.2); /* Lighter background for hover effect */
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.homeLink:hover {
+    background: rgba(255, 255, 255, 0.4); /* Lighter background on hover */
+    color: white; /* Color change on hover */
+}
